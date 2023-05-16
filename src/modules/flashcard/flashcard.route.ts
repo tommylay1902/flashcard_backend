@@ -9,6 +9,7 @@ import { $ref } from "./flashcard.schema";
 import { getFlashCardsBySetService } from "./flashcard.service";
 
 async function flashCardRoutes(server: FastifyInstance) {
+  console.log("registering flashcards");
   server.get(
     "/flashcards/:id",
     {

@@ -2,6 +2,7 @@ import { FastifyInstance } from "fastify";
 import {
   createFlashCardSet,
   getFlashCardSetById,
+  updateFlashCardSet,
 } from "./flashcardset.controller";
 import { $ref } from "./flashcardset.schema";
 
@@ -17,4 +18,6 @@ export async function flashCardSetRoutes(server: FastifyInstance) {
     },
     createFlashCardSet
   );
+
+  server.patch("/flashCardSets/:id", updateFlashCardSet);
 }

@@ -47,6 +47,7 @@ export async function createFlashCard(
 ) {
   try {
     const flashCard = await createFlashCardService(req.body);
+
     if (!flashCard) {
       reply.code(404).send();
     }
@@ -64,6 +65,7 @@ export async function updateFlashCardHandler(
   reply: FastifyReply
 ) {
   try {
+    console.log(req.params.id);
     const id = +req.params.id;
 
     await updateFlashCardByIdService(id, req.body);

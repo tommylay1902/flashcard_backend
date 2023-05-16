@@ -22,16 +22,20 @@ export async function getFlashCardByIdService(id: number) {
 }
 
 export async function createFlashCardService(flashCard: CreateFlashCardInput) {
-  const flashCardSet = await prisma.flash_card_set.findUnique({
-    where: {
-      id: flashCard.flashcardSetId,
-    },
-  });
-  if (!flashCardSet) {
-    return undefined;
+  try {
+    const flashCardSet = await prisma.flash_card_set.findUnique({
+      where: {
+        id: flashCard.flashcardSetId,
+      },
+    });
+    if (!flashCardSet) {
+      return undefined;
+    }
+    const result = await prisma.flash_card.create({ data: flashCard });
+    return result;
+  } catch (error) {
+    console.log(error);
   }
-  const result = await prisma.flash_card.create({ data: flashCard });
-  return result;
 }
 
 export async function updateFlashCardByIdService(
