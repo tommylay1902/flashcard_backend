@@ -6,7 +6,6 @@ import {
   updateFCHandler,
 } from "./flashcard.controller";
 import { $ref } from "./flashcard.schema";
-import { getBySet } from "./flashcard.service";
 
 async function flashCardRoutes(server: FastifyInstance) {
   console.log("registering flashcards");

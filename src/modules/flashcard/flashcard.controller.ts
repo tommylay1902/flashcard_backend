@@ -22,6 +22,7 @@ export async function getFCBySetHandler(
 
 export async function getFCHandler(req: FlashCardRequest, reply: FastifyReply) {
   try {
+    console.log("we are getting called");
     const id = +req.params.id;
 
     const flashCard = await getById(id);
@@ -60,5 +61,7 @@ export async function updateFCHandler(
     const id = +req.params.id;
 
     await update(id, req.body);
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 }
