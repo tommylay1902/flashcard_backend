@@ -4,14 +4,25 @@ import {
   UpdateFlashCardSetInput,
 } from "./flashcardset.schema";
 
-export async function createFlashCardSetService(
-  flashcardSet: CreateFlashCardSetInput
-) {
+//TODO: update to get all flashcards related to logged in user
+export async function getAll() {
+  const result = prisma.flash_card_set.findMany();
+  return result;
+}
+
+//TODO: update to get flashcard set that has related id under logged in user
+export async function getById(id: number) {
+  const result = prisma.flash_card_set.findUnique({ where: { id } });
+
+  return result;
+}
+
+export async function create(flashcardSet: CreateFlashCardSetInput) {
   const result = await prisma.flash_card_set.create({ data: flashcardSet });
   return result;
 }
 
-export async function updateFlashCardSetByIdService(
+export async function update(
   id: number,
   flashCardSetUpdate: UpdateFlashCardSetInput
 ) {

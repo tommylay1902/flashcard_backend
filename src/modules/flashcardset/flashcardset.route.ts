@@ -1,13 +1,15 @@
 import { FastifyInstance } from "fastify";
 import {
-  createFlashCardSet,
-  getFlashCardSetById,
-  updateFlashCardSet,
+  createFCSetHandler,
+  getFCSetByIdHandler,
+  getFCSetHandler,
+  updateFCSetHandler,
 } from "./flashcardset.controller";
 import { $ref } from "./flashcardset.schema";
 
 export async function flashCardSetRoutes(server: FastifyInstance) {
-  server.get("/flashCardSets", getFlashCardSetById);
+  server.get("/flashCardSets", getFCSetHandler);
+  server.get("/flashCardSets/:id", getFCSetByIdHandler);
   server.post(
     "/flashCardSets",
     {
@@ -16,8 +18,8 @@ export async function flashCardSetRoutes(server: FastifyInstance) {
         response: { 201: $ref("flashCardSetResponse") },
       },
     },
-    createFlashCardSet
+    createFCSetHandler
   );
 
-  server.patch("/flashCardSets/:id", updateFlashCardSet);
+  server.patch("/flashCardSets/:id", updateFCSetHandler);
 }

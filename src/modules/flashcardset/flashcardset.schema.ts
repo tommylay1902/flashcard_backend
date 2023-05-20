@@ -6,8 +6,6 @@ const flashCardCore = {
   description: z.string(),
 };
 
-// const getFlashCardsResponse = z.array(getFlashCardResponse);
-
 const flashCardSetInput = z.object({
   ...flashCardCore,
 });
@@ -15,14 +13,6 @@ const flashCardSetInput = z.object({
 const flashCardSetResponse = z.object({
   ...flashCardCore,
 });
-
-// id          Int          @id @default(autoincrement())
-// title       String
-// description String
-// createdAt   DateTime     @default(now())
-// user        user?        @relation(fields: [userId], references: [id])
-// flashcards  flash_card[]
-// userId      Int?
 
 const flashSetUpdateInput = z
   .object({

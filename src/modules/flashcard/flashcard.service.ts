@@ -1,7 +1,7 @@
 import { prisma } from "../../utils/prisma";
 import { CreateFlashCardInput, UpdateFlashCardInput } from "./flashcard.schema";
 
-export async function getFlashCardsBySetService(id: number) {
+export async function getBySet(id: number) {
   const flashCards = await prisma.flash_card.findMany({
     where: { flashcardSetId: id },
   });
@@ -9,7 +9,7 @@ export async function getFlashCardsBySetService(id: number) {
   return flashCards;
 }
 
-export async function getFlashCardByIdService(id: number) {
+export async function getById(id: number) {
   try {
     const flashCard = await prisma.flash_card.findUnique({
       where: { id },
@@ -21,7 +21,7 @@ export async function getFlashCardByIdService(id: number) {
   }
 }
 
-export async function createFlashCardService(flashCard: CreateFlashCardInput) {
+export async function create(flashCard: CreateFlashCardInput) {
   try {
     const flashCardSet = await prisma.flash_card_set.findUnique({
       where: {
@@ -38,7 +38,7 @@ export async function createFlashCardService(flashCard: CreateFlashCardInput) {
   }
 }
 
-export async function updateFlashCardByIdService(
+export async function update(
   id: number,
   flashCardUpdate: UpdateFlashCardInput
 ) {

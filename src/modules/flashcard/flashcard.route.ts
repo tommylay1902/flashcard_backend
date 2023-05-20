@@ -1,12 +1,12 @@
 import { FastifyInstance } from "fastify";
 import {
-  createFlashCard,
-  getFCBySet,
-  getFlashCardById,
-  updateFlashCardHandler,
+  createFCHandler,
+  getFCBySetHandler,
+  getFCHandler,
+  updateFCHandler,
 } from "./flashcard.controller";
 import { $ref } from "./flashcard.schema";
-import { getFlashCardsBySetService } from "./flashcard.service";
+import { getBySet } from "./flashcard.service";
 
 async function flashCardRoutes(server: FastifyInstance) {
   console.log("registering flashcards");
@@ -19,7 +19,7 @@ async function flashCardRoutes(server: FastifyInstance) {
         },
       },
     },
-    getFlashCardById
+    getFCHandler
   );
 
   server.get(
@@ -27,7 +27,7 @@ async function flashCardRoutes(server: FastifyInstance) {
     {
       schema: {},
     },
-    getFCBySet
+    getFCBySetHandler
   );
 
   server.post(
@@ -40,7 +40,7 @@ async function flashCardRoutes(server: FastifyInstance) {
         },
       },
     },
-    createFlashCard
+    createFCHandler
   );
 
   server.patch(
@@ -48,7 +48,7 @@ async function flashCardRoutes(server: FastifyInstance) {
     {
       schema: { body: $ref("flashCardUpdateInput") },
     },
-    updateFlashCardHandler
+    updateFCHandler
   );
 }
 

@@ -1,23 +1,18 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { CreateFlashCardInput, UpdateFlashCardInput } from "./flashcard.schema";
-import {
-  getFlashCardsBySetService,
-  getFlashCardByIdService,
-  createFlashCardService,
-  updateFlashCardByIdService,
-} from "./flashcard.service";
+import { getBySet, getById, create, update } from "./flashcard.service";
 
 type FlashCardRequest = FastifyRequest<{
   Params: { id: number };
 }>;
 
-export async function getFCBySet(
+export async function getFCBySetHandler(
   req: FastifyRequest<{ Params: { id: number } }>,
   reply: FastifyReply
 ) {
   try {
     const id = +req.params.id;
-    const flashCardsBySet = await getFlashCardsBySetService(id);
+    const flashCardsBySet = await getBySet(id);
 
     return flashCardsBySet;
   } catch (error) {
@@ -25,28 +20,25 @@ export async function getFCBySet(
   }
 }
 
-export async function getFlashCardById(
-  req: FlashCardRequest,
-  reply: FastifyReply
-) {
+export async function getFCHandler(req: FlashCardRequest, reply: FastifyReply) {
   try {
     const id = +req.params.id;
 
-    const flashCard = await getFlashCardByIdService(id);
+    const flashCard = await getById(id);
     return flashCard;
   } catch (error) {
     console.log(error);
   }
 }
 
-export async function createFlashCard(
+export async function createFCHandler(
   req: FastifyRequest<{
     Body: CreateFlashCardInput;
   }>,
   reply: FastifyReply
 ) {
   try {
-    const flashCard = await createFlashCardService(req.body);
+    const flashCard = await create(req.body);
 
     if (!flashCard) {
       reply.code(404).send();
@@ -57,17 +49,16 @@ export async function createFlashCard(
   }
 }
 
-export async function updateFlashCardHandler(
+export async function updateFCHandler(
   req: FastifyRequest<{
-    Params: { id: number };
+    Params: { id: string };
     Body: UpdateFlashCardInput;
   }>,
   reply: FastifyReply
 ) {
   try {
-    console.log(req.params.id);
     const id = +req.params.id;
 
-    await updateFlashCardByIdService(id, req.body);
+    await update(id, req.body);
   } catch (error) {}
 }

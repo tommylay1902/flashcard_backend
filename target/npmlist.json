@@ -1,0 +1,1 @@
+{"version":"1.0.0","name":"flashcards","dependencies":{"@prisma/client":{"version":"4.14.0"},"fastify-jwt":{"version":"4.2.0"},"fastify-swagger":{"version":"5.2.0"},"fastify-zod":{"version":"1.3.2"},"fastify":{"version":"4.17.0"},"zod-to-json-schema":{"version":"3.21.1"},"zod":{"version":"3.21.4"}}}
